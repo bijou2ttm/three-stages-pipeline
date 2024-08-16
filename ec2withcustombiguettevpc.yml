@@ -123,7 +123,7 @@ Resources:
           yum install -y httpd
           systemctl start httpd
           systemctl enable httpd
-          echo "<html><body><h1>thank you to my classmate fotso in ${AWS::Region}</h1></body></html>" > /var/www/html/index.html
+          echo "<html><body><h1>thank you to my classmate fotso for your support in ${AWS::Region}</h1></body></html>" > /var/www/html/index.html
 
 Outputs:
   VPCId:
@@ -131,20 +131,19 @@ Outputs:
     Value: !Ref VPC
     Export:
       Name: !Sub '${AWS::StackName}-VPCID'
+
   PublicSubnet:
     Description: The subnet ID to use for public web servers
     Value: !Ref PublicSubnet
     Export:
       Name: !Sub '${AWS::StackName}-SubnetID'
+
   WebServerSecurityGroup:
     Description: The security group ID to use for public web servers
-    Value: !GetAtt 
-      - WebServerSecurityGroup
-      - GroupId
+    Value: !GetAtt WebServerSecurityGroup.GroupId
     Export:
       Name: !Sub '${AWS::StackName}-SecurityGroupID'
+
   WebServerPublicIP:
     Description: The public IP address of the web server instance
-    Value: !GetAtt 
-      - WebServerInstance
-      - PublicIp
+    Value: !GetAtt WebServerInstance.PublicIp
